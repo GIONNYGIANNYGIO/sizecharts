@@ -1,115 +1,202 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>100 Ottani Please!™ - Size Guide</title>
-    <style>
-        body {
-            background-color: #0b0b0b;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .modal__content {
-            max-width: 1000px;
-            width: 100%;
-            background: #121212;
-            border: 1px solid #222;
-            border-radius: 8px;
-            padding: 30px;
-            position: relative;
-        }
-        .modal__close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: #888;
-            cursor: pointer;
-        }
-        .modal__title-text {
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 0;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-        }
-        .size-chart__unit-toggle {
-            margin-bottom: 20px;
-        }
-        .button--unit {
-            background: #222;
-            border: 1px solid #333;
-            color: #fff;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-right: 5px;
-        }
-        .button--unit.active {
-            background: #fff;
-            color: #000;
-        }
-        .modal__body--grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-        @media (max-width: 768px) {
-            .modal__body--grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        .size-chart__image {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        .size-chart__table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-        .size-chart__cell--title {
-            padding: 12px;
-            border-bottom: 2px solid #333;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            color: #888;
-        }
-        .size-chart__cell {
-            padding: 14px 12px;
-            border-bottom: 1px solid #222;
-        }
-        .modal__footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #222;
-            font-size: 0.9rem;
-            color: #aaa;
-            line-height: 1.6;
-        }
-        .modal__footer h6 {
-            color: #fff;
-            font-size: 1rem;
-            margin: 20px 0 5px 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Size Guide Modal</title>
+  <style>
+    /* Reset e stili base basati sullo screenshot */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background-color: #0b0b0b;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Contenitore principale del Modal */
+    .modal__content {
+      background-color: #121212;
+      width: 100%;
+      max-width: 800px;
+      padding: 30px;
+      position: relative;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Pulsante di chiusura */
+    .modal__close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #888;
+      cursor: pointer;
+      padding: 5px;
+      transition: color 0.2s;
+    }
+    
+    .modal__close:hover {
+      color: #fff;
+    }
+
+    /* Header del modal */
+    .modal__title {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 25px;
+      padding-right: 40px;
+    }
+
+    .modal__title-text {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.3;
+      max-width: 80%;
+    }
+
+    /* Toggle Unità di Misura (in / cm) */
+    .size-chart__unit-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #1a1a1a;
+      padding: 4px;
+      border-radius: 30px;
+    }
+
+    .button--unit {
+      background: none;
+      border: none;
+      color: #888;
+      font-weight: bold;
+      font-size: 14px;
+      text-transform: uppercase;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.2s;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .button--unit.active {
+      background-color: #eaff00; /* Giallo evidenziatore come da screen */
+      color: #000000;
+    }
+
+    /* Layout Principale a Griglia (Immagine + Tabella) */
+    .modal__body--grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .modal__body--grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Container Immagine Prodotto */
+    .size-chart__image-container {
+      background-color: #181818;
+      border: 1px solid #252525;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      border-radius: 4px;
+    }
+
+    .size-chart__image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Tabella delle taglie */
+    .size-chart__table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    .size-chart__table-head th {
+      font-size: 12px;
+      color: #777777;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 12px 8px;
+      text-align: left;
+      border-bottom: 1px solid #222;
+    }
+
+    .size-chart__row {
+      border-bottom: 1px solid #222;
+    }
+
+    .size-chart__cell {
+      padding: 16px 8px;
+      color: #ffffff;
+    }
+
+    .size-chart__value-label {
+      font-weight: bold;
+    }
+
+    /* Footer / Descrizioni di testo */
+    .modal__footer {
+      border-top: 1px solid #222;
+      padding-top: 20px;
+    }
+
+    .modal__description {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    /* Testo descrittivo principale in uppercase come da screen */
+    .modal__description p {
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Intestazioni delle sezioni A, B, C */
+    .modal__description h6 {
+      font-family: 'Arial Black', sans-serif;
+      font-size: 14px;
+      color: #fff;
+      text-transform: uppercase;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="modal__content modal__content--narrow">
-    <button class="modal__close">
+  <div class="modal__content modal__content--narrow">
+    <button class="modal__close" aria-label="Chiudi">
       <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
         <path d="M7 7L1.27 1.27 7 7l5.73-5.73L7 7zm0 0l5.73 5.73L7 7l-5.73 5.73L7 7z" stroke="currentColor" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="square"></path>
       </svg>
@@ -121,15 +208,15 @@
 
         <div class="modal__cta-container">
           <div class="size-chart__unit-toggle">
-            <button id="btn-in" class="button button--unit active">in</button>
-            <button id="btn-cm" class="button button--unit">cm</button>
+            <button data-size="inches-button" class="button button--unit" onclick="switchUnit('in')">in</button>
+            <button data-size="cm-button" class="button button--unit active" onclick="switchUnit('cm')">cm</button>
           </div>
         </div>
       </div>
 
       <div class="modal__body modal__body--grid">
         <div class="size-chart__image-container">
-            <img class="size-chart__image" src="https://imgproxy.fourthwall.dev/0UqLgsT7WCPtYkhd5K9trE4WLpjaOCWkZrggPzyaIRg/w:1400/sm:1/enc/UpxUSxkjvYV0jaiQ/YfStADZS8XRw9_XC/yxGaHN1GuOfYyqua/bYLQWklgofnxp5I6/wTeKl6a3FvThMEbQ/lSO_YKFv1DSh-UOW/8XNhNSkB73iuCRD3/C6gJCPMMkBfH9XqD/mTArNYGf7zsr3bjf/14S365Yuhb4Zcj_n/1keyC6saCQ4.jpg" alt="Size guide preview">
+          <img class="size-chart__image" src="https://imgproxy.fourthwall.dev/0UqLgsT7WCPtYkhd5K9trE4WLpjaOCWkZrggPzyaIRg/w:1400/sm:1/enc/UpxUSxkjvYV0jaiQ/YfStADZS8XRw9_XC/yxGaHN1GuOfYyqua/bYLQWklgofnxp5I6/wTeKl6a3FvThMEbQ/lSO_YKFv1DSh-UOW/8XNhNSkB73iuCRD3/C6gJCPMMkBfH9XqD/mTArNYGf7zsr3bjf/14S365Yuhb4Zcj_n/1keyC6saCQ4.jpg" alt="Size guide preview">
         </div>
 
         <table class="size-chart__table">
@@ -141,75 +228,110 @@
               <th class="size-chart__cell size-chart__cell--title">Sleeve length</th>
             </tr>
           </thead>
-
-          <tbody class="size-chart__body">
-            <tr class="size-chart__row">
-                <td class="size-chart__cell"><strong>S</strong></td>
-                <td class="size-chart__cell" data-type="Length" data-in="28.7" data-cm="73.0">28.7</td>
-                <td class="size-chart__cell" data-type="Width" data-in="24.8" data-cm="63.0">24.8</td>
-                <td class="size-chart__cell" data-type="SleeveLength" data-in="9.4" data-cm="24.0">9.4</td>
-            </tr>
-            <tr class="size-chart__row">
-                <td class="size-chart__cell"><strong>M</strong></td>
-                <td class="size-chart__cell" data-type="Length" data-in="29.5" data-cm="75.0">29.5</td>
-                <td class="size-chart__cell" data-type="Width" data-in="26.4" data-cm="67.0">26.4</td>
-                <td class="size-chart__cell" data-type="SleeveLength" data-in="9.7" data-cm="24.5">9.7</td>
-            </tr>
-            <tr class="size-chart__row">
-                <td class="size-chart__cell"><strong>L</strong></td>
-                <td class="size-chart__cell" data-type="Length" data-in="30.3" data-cm="77.0">30.3</td>
-                <td class="size-chart__cell" data-type="Width" data-in="27.9" data-cm="71.0">27.9</td>
-                <td class="size-chart__cell" data-type="SleeveLength" data-in="9.8" data-cm="25.0">9.8</td>
-            </tr>
-            <tr class="size-chart__row">
-                <td class="size-chart__cell"><strong>XL</strong></td>
-                <td class="size-chart__cell" data-type="Length" data-in="31.5" data-cm="80.0">31.5</td>
-                <td class="size-chart__cell" data-type="Width" data-in="29.9" data-cm="76.0">29.9</td>
-                <td class="size-chart__cell" data-type="SleeveLength" data-in="10.0" data-cm="25.5">10.0</td>
-            </tr>
-            <tr class="size-chart__row">
-                <td class="size-chart__cell"><strong>2XL</strong></td>
-                <td class="size-chart__cell" data-type="Length" data-in="32.5" data-cm="82.5">32.5</td>
-                <td class="size-chart__cell" data-type="Width" data-in="31.9" data-cm="81.0">31.9</td>
-                <td class="size-chart__cell" data-type="SleeveLength" data-in="10.2" data-cm="26.0">10.2</td>
-            </tr>
-          </tbody>
+          <tbody class="size-chart__body" id="table-body">
+            </tbody>
         </table>
       </div>
 
       <div class="modal__footer">
         <div class="modal__description">
-          <p dir="ltr">Measurements are provided by our suppliers. Product measurements may vary by up to 2" (5 cm).</p>
-          <p dir="ltr">US customers should order a size up as the EU sizes for this supplier correspond to a smaller size in the US market.</p>
-          <p dir="ltr">Pro tip! Measure one of your products at home and compare with the measurements you see in this guide.</p><br>
-          <h6><strong>A Length</strong></h6>
-          <p dir="ltr">Place the end of the tape beside the collar at the top of the tee (Highest Point Shoulder). Pull the tape measure to the bottom of the shirt.</p>
-          <h6><strong>B Width</strong></h6>
-          <p dir="ltr">Place the end of the tape at the seam under the sleeve and pull the tape measure across the shirt to the seam under the opposite sleeve.</p>
-          <h6><strong>C Sleeve length</strong></h6>
-          <p dir="ltr">Place one end of the tape at the top of the set-in sleeve, then pull the tape down until you reach the hem of the sleeve.</p>
+          <p>Measurements are provided by our suppliers. Product measurements may vary by up to 2" (5 cm).</p>
+          <p>US customers should order a size up as the EU sizes for this supplier correspond to a smaller size in the US market.</p>
+          <p style="color: #eaff00;">Pro tip! Measure one of your products at home and compare with the measurements you see in this guide.</p>
+          
+          <h6>A Length</h6>
+          <p style="text-transform: none;">Place the end of the tape beside the collar at the top of the tee (Highest Point Shoulder). Pull the tape measure to the bottom of the shirt.</p>
+          
+          <h6>B Width</h6>
+          <p style="text-transform: none;">Place the end of the tape at the seam under the sleeve and pull the tape measure across the shirt to the seam under the opposite sleeve.</p>
+          
+          <h6>C Sleeve length</h6>
+          <p style="text-transform: none;">Place one end of the tape at the top of the set-in sleeve, then pull the tape down until you reach the hem of the sleeve.</p>
         </div>
       </div>
+
+      <script data-size-guide="json" id="size-data" type="application/json">
+        [
+          {
+            "label": "S",
+            "Length": { "in": "28.74", "cm": "73" },
+            "Width": { "in": "24.8", "cm": "63" },
+            "SleeveLength": { "in": "9.45", "cm": "24" }
+          },
+          {
+            "label": "M",
+            "Length": { "in": "29.53", "cm": "75" },
+            "Width": { "in": "26.38", "cm": "67" },
+            "SleeveLength": { "in": "9.65", "cm": "25" }
+          },
+          {
+            "label": "L",
+            "Length": { "in": "30.31", "cm": "77" },
+            "Width": { "in": "27.95", "cm": "71" },
+            "SleeveLength": { "in": "9.84", "cm": "25" }
+          },
+          {
+            "label": "XL",
+            "Length": { "in": "31.5", "cm": "80" },
+            "Width": { "in": "29.92", "cm": "76" },
+            "SleeveLength": { "in": "10.04", "cm": "26" }
+          },
+          {
+            "label": "2XL",
+            "Length": { "in": "32.48", "cm": "82" },
+            "Width": { "in": "31.89", "cm": "81" },
+            "SleeveLength": { "in": "10.24", "cm": "26" }
+          }
+        ]
+      </script>
+
+      <script>
+        // Carica i dati JSON
+        const sizeData = JSON.parse(document.getElementById('size-data').textContent);
+        let currentUnit = 'cm'; // Unità predefinita come da screenshot
+
+        function renderTable() {
+          const tbody = document.getElementById('table-body');
+          tbody.innerHTML = '';
+
+          sizeData.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.className = 'size-chart__row';
+            
+            // Arrotonda visivamente per mostrare interi puliti in CM o decimali in Pollici
+            const lengthVal = currentUnit === 'cm' ? Math.round(row.Length[currentUnit]) : row.Length[currentUnit];
+            const widthVal = currentUnit === 'cm' ? Math.round(row.Width[currentUnit]) : row.Width[currentUnit];
+            const sleeveVal = currentUnit === 'cm' ? Math.round(row.SleeveLength[currentUnit]) : row.SleeveLength[currentUnit];
+
+            tr.innerHTML = `
+              <td class="size-chart__cell"><div class="size-chart__value-label">${row.label}</div></td>
+              <td class="size-chart__cell"><div class="size-chart__value">${lengthVal}</div></td>
+              <td class="size-chart__cell"><div class="size-chart__value">${widthVal}</div></td>
+              <td class="size-chart__cell"><div class="size-chart__value">${sleeveVal}</div></td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+
+        function switchUnit(unit) {
+          currentUnit = unit;
+          
+          // Gestione delle classi attive sui bottoni
+          document.querySelectorAll('.button--unit').forEach(btn => btn.classList.remove('active'));
+          if (unit === 'cm') {
+            document.querySelector('[data-size="cm-button"]').classList.add('active');
+          } else {
+            document.querySelector('[data-size="inches-button"]').classList.add('active');
+          }
+          
+          renderTable();
+        }
+
+        // Inizializzazione della tabella al caricamento
+        renderTable();
+      </script>
     </div>
-</div>
-
-<script>
-    const btnIn = document.getElementById('btn-in');
-    const btnCm = document.getElementById('btn-cm');
-    const cells = document.querySelectorAll('[data-type]');
-
-    btnIn.addEventListener('click', () => {
-        btnIn.classList.add('active');
-        btnCm.classList.remove('active');
-        cells.forEach(cell => cell.textContent = cell.getAttribute('data-in'));
-    });
-
-    btnCm.addEventListener('click', () => {
-        btnCm.classList.add('active');
-        btnIn.classList.remove('active');
-        cells.forEach(cell => cell.textContent = cell.getAttribute('data-cm'));
-    });
-</script>
+  </div>
 
 </body>
 </html>
