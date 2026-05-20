@@ -11,7 +11,7 @@
       margin: 0;
       padding: 0;
     }
-    
+
     body {
       background-color: #0b0b0b;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -46,7 +46,7 @@
       padding: 5px;
       transition: color 0.2s;
     }
-    
+
     .modal__close:hover {
       color: #fff;
     }
@@ -229,7 +229,7 @@
             </tr>
           </thead>
           <tbody class="size-chart__body" id="table-body">
-            </tbody>
+          </tbody>
         </table>
       </div>
 
@@ -286,9 +286,8 @@
       </script>
 
       <script>
-        // Carica i dati JSON
         const sizeData = JSON.parse(document.getElementById('size-data').textContent);
-        let currentUnit = 'cm'; // Unità predefinita come da screenshot
+        let currentUnit = 'cm';
 
         function renderTable() {
           const tbody = document.getElementById('table-body');
@@ -298,7 +297,6 @@
             const tr = document.createElement('tr');
             tr.className = 'size-chart__row';
             
-            // Arrotonda visivamente per mostrare interi puliti in CM o decimali in Pollici
             const lengthVal = currentUnit === 'cm' ? Math.round(row.Length[currentUnit]) : row.Length[currentUnit];
             const widthVal = currentUnit === 'cm' ? Math.round(row.Width[currentUnit]) : row.Width[currentUnit];
             const sleeveVal = currentUnit === 'cm' ? Math.round(row.SleeveLength[currentUnit]) : row.SleeveLength[currentUnit];
@@ -316,7 +314,6 @@
         function switchUnit(unit) {
           currentUnit = unit;
           
-          // Gestione delle classi attive sui bottoni
           document.querySelectorAll('.button--unit').forEach(btn => btn.classList.remove('active'));
           if (unit === 'cm') {
             document.querySelector('[data-size="cm-button"]').classList.add('active');
@@ -327,7 +324,6 @@
           renderTable();
         }
 
-        // Inizializzazione della tabella al caricamento
         renderTable();
       </script>
     </div>
